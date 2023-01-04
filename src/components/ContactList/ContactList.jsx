@@ -4,6 +4,8 @@ import Notification from 'components/Notification/Notification';
 import { deleteContact } from 'redux/operations';
 import { getContacts, getIsLoading } from 'redux/selector';
 import { getFilter } from 'redux/selector';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 const ContactList = () => {
     const filterInput = useSelector(getFilter);
@@ -18,6 +20,10 @@ const ContactList = () => {
             contact.name.toLowerCase().includes(isAddedFilter)
         );
     };
+
+    useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
     const filtredList = getContactsList();
 
